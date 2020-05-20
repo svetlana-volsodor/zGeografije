@@ -1,0 +1,13 @@
+h1{
+    text-align: center;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.btn {
+    width: 200px;
+    border-radius: 5px;
+}
+body {
+    background-image: url("images/mapasiva.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}

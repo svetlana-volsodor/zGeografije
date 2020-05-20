@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zanimljive geografije</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+    <header>
+        <h1>Zanimljive geografije</h1>
+    </header>
+    <div> 
+        <form id="formKorisnik">
+            <input type="text" placeholder="Update username" id="inputKorisnik">
+            <input type="submit" value="Update" id="btnKorisnik" class="btn">
+        </form>
+    </div> 
+    <div id="meni">
+        <a href="pojamPredlog.html" target="blank"><button id="btnPojmovi" class="btn">Pojmovi</button></a>
+    </div>   
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyAO3FpOXtVtmRuE7YuLrRmttd6onhgIxmU",
+        authDomain: "zanimljivegeografije.firebaseapp.com",
+        databaseURL: "https://zanimljivegeografije.firebaseio.com",
+        projectId: "zanimljivegeografije",
+        storageBucket: "zanimljivegeografije.appspot.com",
+        messagingSenderId: "1047582629466",
+        appId: "1:1047582629466:web:43a173b367611d1a600263",
+        measurementId: "G-V1NRMC5V29"
+    };
+    
+    
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    let db = firebase.firestore();
+
+    </script>
+
+    <script src="app.js"></script>
+    
+</body>
+</html>
