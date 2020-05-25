@@ -12,21 +12,7 @@
         <h1>Zanimljive geografije</h1>
     </header>
 
-    <div>
-        <form>
-            <select id="kategorije">
-                <option value="drzava">Država</option>
-                <option value="grad">Grad</option>
-                <option value="reka">Reka</option>
-                <option value="planina">Planina</option>
-                <option value="zivotinja">Životinja</option>
-                <option value="biljka">Biljka</option>
-                <option value="predmet">Predmet</option>
-            </select>
-            <input type="text" placeholder="Unesite predlog" id="predlog">
-            <input type="submit" class="btn" id="subPredlog">
-        </form>
-    </div>
+    
 
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
@@ -56,7 +42,8 @@
     </script>
 
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
+    <script type="module" src="pojam.js"></script>
       
 </body>
 </html>

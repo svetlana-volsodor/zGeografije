@@ -18,9 +18,24 @@
             <input type="submit" value="Update" id="btnKorisnik" class="btn">
         </form>
     </div> 
-    <div id="meni">
+    <!-- <div id="meni">
         <a href="pojamPredlog.html" target="blank"><button id="btnPojmovi" class="btn">Pojmovi</button></a>
-    </div>   
+    </div>  -->
+    <div id="predlogPojma">
+        <form id="pojmoviDrop">
+            <select id="kategorije">
+                <option value="Država">Država</option>
+                <option value="Grad">Grad</option>
+                <option value="Reka">Reka</option>
+                <option value="Planina">Planina</option>
+                <option value="Životinja">Životinja</option>
+                <option value="Biljka">Biljka</option>
+                <optio value="Predmet">Predmet</option>
+            </select>
+            <input type="text" placeholder="Unesite predlog pojma" id="inputPojam">
+            <input type="submit" class="btn" id="subPojam">
+        </form>
+    </div>
 
         <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
@@ -52,7 +67,8 @@
 
     </script>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
+    <script type="module" src="pojam.js"></script>
     
 </body>
 </html>

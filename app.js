@@ -1,82 +1,53 @@
+import {Pojmovi} from "./pojam.js"
+
+
 let formKorisnik = document.querySelector('#formKorisnik');
 let inputKorisnik = document.querySelector('#inputKorisnik');
-let btnUpdate = document.querySelector('#btnKorisnik');
+//let btnUpdate = document.querySelector('#btnKorisnik');
 let btnPojmovi = document.querySelector('#btnPojmovi');
- 
- 
- 
- 
- 
- 
- class Pojmovi{
-    constructor (k, kat, s){
-        this.korisnik = k;
-        this.kategorija = kat;
-        this.pojam = db.collection('pojmovi');
-        this.slovo = s
-    }
+let formPojmoviDrop = document.querySelector('#pojmoviDrop');
+let inputPojam = document.querySelector('#inputPojam');
+let pojamSubmit = document.querySelector('#subPojam');
+let kategorijaDrop = document.querySelector('#kategorije');
+let divPojam = document.querySelector('#predlogPojma');
 
-    set korisnik(k){
-        this._korisnik = k;
-    }
-    get korisnik(){
-        return this._korisnik;
-    }
-    set kategorija(kat){
-        this._kategorija = kat;
-    }
-    get kategorija(){
-        return this._kategorija;
-    }
-    set slovo(s){
-        this._slovo = s;
-    }
-    get slovo(){
-        return this._slovo;
-    }
-    
-    updateKorisnik(noviKorisnik){
-        this.korisnik = noviKorisnik;
-        localStorage.setItem('korisnikLS', noviKorisnik);
-    }
 
-    async addPojam(pojam){
-        let dateTmp = new Date();
+divPojam.style.display = 'none';
+
+
+console.log(inputPojam);
+
+     
+// let korisnik = () => {
+//     if(localStorage.korisnikLS){
         
-        let noviPojam = {
-            nPoj: pojam,
-            korisnik: this.korisnik,
-            kategorija: this.kategorija,
-            pocetnoSlovo: this.slovo,
-            vreme: firebase.firestore.Timestamp.fromDate(dateTmp)
-        };
-        let response = await this.pojam.add(noviPojam);  //kada u this.chats dodamo kreirani chat - to je odgovor koji ceka (awaits)
-        console.log(response);
-        return response;
-    }
-    
-} 
+//         return localStorage.korisnikLS;
+        
 
-let korisnik = () => {
-    if(localStorage.korisnikLS){
-        return localStorage.korisnikLS;
-    } else {
-         alert("Ime korisnika nije adekvatno. Molimo Vas vratite se na početnu stranicu.");
-    }
-};
+//     } else {
+        
+//        divPojam.style.display = "none";
+//     }
+// };
 
-let zanimljiva = new Pojmovi(korisnik(), "Grad");
 
 formKorisnik.addEventListener('submit', (e)=>{
     e.preventDefault();
     let patternKorisnik = /^[^\s]{2,}$/;
     if(patternKorisnik.test(inputKorisnik.value)){
-    zanimljiva.updateKorisnik(inputKorisnik.value);
-    localStorage.korisnikLS = inputKorisnik.value;
+    localStorage.setItem('korisnikLS', inputKorisnik.value);
+    location.reload();
+    
+    } else {
+        alert('Nevalidan unos! Probajte ponovo :)')
+        divPojam.style.display = "none"
     }
     formKorisnik.reset();
 });
-    
+
+if(localStorage.korisnikLS){
+    divPojam.style.display = "block";
+}
 
 // let kolekcijaPojmovi = db.collection('pojmovi').get()
 //     .then(function(querySnapshot) {
@@ -88,10 +59,88 @@ formKorisnik.addEventListener('submit', (e)=>{
 //         console.log("error", error);
 //     })
 
-if(!localStorage.korisnikLS){
-    btnPojmovi.addEventListener('click', e =>{
-        e.preventDefault();
-    })
-}; 
 
+
+
+
+formPojmoviDrop.addEventListener ('submit', e=>{
+    e.preventDefault();
+    let kategorija = kategorijaDrop.value;
+    let pojam = inputPojam.value;
+    pojam = pojam[0].toUpperCase() + pojam.slice(1).toLowerCase();
+    pojam = pojam.replace(/\s+/g, '');
+    let noviPojam = new Pojmovi(kategorija, pojam);
+
+    if(!pojam){
+        alert('Unos nije validan!')
+    } else {
+       
+        //console.log(pojam);
+        noviPojam.proveraPojam();
+     
+    }
+    formPojmoviDrop.reset();
+});
+
+
+
+  
+// function sortByFrequencyAndRemoveDuplicates(array) {
+//     var frequency = {}, value;
+//     // compute frequencies of each value
+//     for(var i = 0; i < array.length; i++) {
+//         value = array[i];
+//         if(value in frequency) {
+//             frequency[value]++;
+//         }
+//         else {
+//             frequency[value] = 1;
+//         }
+//     }
+//     // make array from the frequency object to de-duplicate
+//     var uniques = [];
+//     for(value in frequency) {
+//         if(uniques.length == 5) {
+//             break;
+//         }
+//         else {
+//             uniques.push(value);
+//         }
+//     }
+//     // sort the uniques array in descending order by frequency
+//     function compareFrequency(a, b) {
+//         return frequency[b] - frequency[a];
+//     }
+//     return uniques.sort(compareFrequency);
+// }
+
+// db.collection('pojmovi')
+// .orderBy('korisnik')
+// .get()
+// .then(snapshot =>{
+//     let korisnici = [];
+//     let topKor = [];
+//     let br = 0;
+//     snapshot.docs.forEach((doc, i) =>{
+//         korisnici.push(doc.data().korisnik);
+//     });
+//     console.log(sortByFrequencyAndRemoveDuplicates(korisnici));
+//     for(let i = korisnici.length; i>=0; i--){
+//         br++
+//         if(korisnici[i]!= korisnici[i-1]){
+//             if(topKor.length == 5){
+//                 break;
+//             } else {
+//                 topKor.push(br);
+//                 br = 0;
+//             }
+//         }
+        
+//     }
+//     topKor.sort((a,b)=>b-a);
+//         console.log(topKor);
+// })
+// .catch(error =>{
+//     console.log('error', error);
+// });
 
